@@ -187,6 +187,7 @@ def edit_profile(request):
     form = UserForm(request.POST or None, instance=profile)
     if form.is_valid():
         form.save()
-        return redirect('blog:profile', request.user)
+        new_username = form.cleaned_data['username']
+        return redirect('blog:profile', new_username)
     context = {'form': form}
     return render(request, 'blog/user.html', context)
